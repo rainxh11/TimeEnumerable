@@ -1,8 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>NET6.0</TargetFramework>
 	  <LangVersion>10</LangVersion>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
+
+	  <PackageLicenseFile>license.txt</PackageLicenseFile>
+	  <OutputType>Library</OutputType>
+	  <Version>1.0.0</Version>
+	  <StartupObject />
+	  <Authors>Chakhoum Ahmed (github.com/rainxh11)</Authors>
+	  <Description>C# Extenstion Methods to Enumerate over TimeSpans/DateTime/DateOnly/TimeOnly</Description>
+	  <Copyright>© 2023 Chakhoum Ahmed</Copyright>
+	  <PackageLicenseFile></PackageLicenseFile>
+	  <PackageProjectUrl>https://github.com/rainxh11/TimeEnumerable</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/rainxh11/TimeEnumerable</RepositoryUrl>
+	  <RepositoryType>github</RepositoryType>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageTags>functional;func;extensions;time;datetime;timeonly;dateonly;enumerable;iterate</PackageTags>
+	  <TargetsForTfmSpecificBuildOutput>
+		  $(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage
+	  </TargetsForTfmSpecificBuildOutput>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
+	<ItemGroup>
+		<None Include="..\readme.md" Pack="true" PackagePath="\" />
+		<None Include="..\License.txt" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+		</ItemGroup>
+	</Target>
 </Project>

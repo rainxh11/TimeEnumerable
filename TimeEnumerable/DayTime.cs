@@ -10,15 +10,17 @@ public class DayTime : IEquatable<DayTime>, IEquatable<DateTime>
     public TimeOnly Time { get; init; }
 
     public static implicit operator DayTime(DateTime dateTime)
-        => new()
-        {
-            Time = new TimeOnly(dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond),
-            Day = dateTime.DayOfWeek
-        };
+    {
+        return new()
+               {
+                   Time = new TimeOnly(dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond),
+                   Day  = dateTime.DayOfWeek
+               };
+    }
 
     public void Deconstruct(out DayOfWeek day, out TimeOnly time)
     {
-        day = Day;
+        day  = Day;
         time = Time;
     }
 
